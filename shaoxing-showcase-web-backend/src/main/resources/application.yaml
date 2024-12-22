@@ -2,7 +2,7 @@ spring:
   application:
     name: shaoxing-showcase-web-backend
   datasource:
-    url: "jdbc:sql.wsfdb.cn:3306/HexWarrior6shaoxingshowcase?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai"
+    url: "jdbc:mysql://sql.wsfdb.cn:3306/HexWarrior6shaoxingshowcase?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai"
     username: "HexWarrior6shaoxingshowcase"
     password: "DUn98sLBWXr3N6Tu7mwF"
     driver-class-name: com.mysql.cj.jdbc.Driver
