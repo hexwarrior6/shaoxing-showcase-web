@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="logo">
-      <img src="@/assets/logo.png" alt="网站logo" class="logo-image"/>
+      <img src="../../assets/logo.png" alt="网站logo" class="logo-image"/>
       <span class="site-title">基于Java的Web开发期末大作业</span>
     </div>
     <nav class="navbar">
@@ -23,7 +23,7 @@ export default {
 <script setup>
 import {ElMessage} from "element-plus";
 import router from "@/router/index.js";
-import {get} from "@/net";
+import {get} from "@/net/index.js";
 
 const username = localStorage.getItem('username')
 
