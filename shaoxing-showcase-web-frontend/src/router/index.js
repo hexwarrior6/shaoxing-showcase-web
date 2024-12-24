@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import HomePage from '../views/HomePageView.vue';
+import FoodDetail from "@/components/food/FoodDetail.vue";
 
 const routes = [
     {
@@ -38,6 +39,12 @@ const routes = [
     {
         path: '/:pathMatch(.*)*',
         redirect: '/not-found',  // 未找到页面时重定向到 /not-found
+    },
+    {
+        path: '/food/:id', // :id 是动态参数
+        name: 'FoodDetail',
+        component: FoodDetail,
+        meta: {requiresAuth: true},
     },
 ];
 
