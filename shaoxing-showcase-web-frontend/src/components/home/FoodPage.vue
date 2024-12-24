@@ -1,200 +1,164 @@
 <template>
-  <div class="food-page">
-    <h2>家乡美食</h2>
-
-    <!-- 显示美食列表 -->
-    <div class="food-list">
-      <div v-for="food in foodList" :key="food.id" class="food-item">
-        <img :src="food.imageUrl" alt="美食图片" class="food-image" />
-        <div class="food-info">
-          <h3>{{ food.foodName }}</h3>
-          <p><strong>描述：</strong>{{ food.description }}</p>
-          <p><strong>主要原料：</strong>{{ food.ingredients }}</p>
-          <p><strong>起源：</strong>{{ food.origin }}</p>
+  <div class="food-display-container" v-if="!loading && !error">
+    <div class="food-card" v-for="food in foods" :key="food.id">
+      <div class="food-card-inner">
+        <img :src="`/image/${food.imageUrl}`"
+             :alt="food.foodName"
+             class="food-image"/>
+        <div class="food-details">
+          <h2 class="food-name">{{ food.foodName }}</h2>
+          <p class="food-description">{{ food.description }}</p>
+          <p class="food-origin">原产地: {{ food.origin }}</p>
+          <p class="food-ingredients">主要食材: {{ food.ingredients }}</p>
+          <!-- 添加按钮 -->
+          <button @click="viewDetails(food.id)" class="view-details-btn">查看详情</button>
         </div>
       </div>
     </div>
-
-    <!-- 添加美食按钮 -->
-    <button @click="openAddFoodModal">添加美食</button>
-
-    <!-- 添加美食弹窗 -->
-    <div v-if="showAddModal" class="modal">
-      <div class="modal-content">
-        <h3>添加美食</h3>
-        <input v-model="newFood.foodName" placeholder="美食名称" />
-        <textarea v-model="newFood.description" placeholder="美食描述"></textarea>
-        <textarea v-model="newFood.ingredients" placeholder="主要原料"></textarea>
-        <input v-model="newFood.origin" placeholder="美食起源地" />
-        <input v-model="newFood.imageUrl" placeholder="图片URL" />
-
-        <button @click="addFood">提交</button>
-        <button @click="closeAddFoodModal">取消</button>
-      </div>
-    </div>
   </div>
+  <div v-if="loading" class="loading-spinner">加载中...</div>
+  <div v-if="error" class="error-message">{{ error }}</div>
 </template>
 
 <script>
-import axios from 'axios';
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 
 export default {
-  data() {
-    return {
-      foodList: [],  // 存储美食数据
-      showAddModal: false,  // 是否显示添加美食弹窗
-      newFood: {  // 添加新美食的数据模型
-        foodName: '',
-        description: '',
-        ingredients: '',
-        imageUrl: '',
-        origin: ''
-      }
-    };
-  },
-  created() {
-    // 组件创建时获取美食数据
-    this.fetchFoodList();
-  },
-  methods: {
-    // 获取所有美食
-    async fetchFoodList() {
+  setup() {
+    const foods = ref([])
+    const loading = ref(false)
+    const error = ref(null)
+
+    const fetchFoods = async () => {
       try {
-        const response = await axios.get('/api/local-foods');
-        this.foodList = response.data;  // 将返回的数据赋值给 foodList
-      } catch (error) {
-        console.error('获取美食列表失败:', error);
-      }
-    },
-
-    // 打开添加美食的弹窗
-    openAddFoodModal() {
-      this.showAddModal = true;
-    },
-
-    // 关闭添加美食的弹窗
-    closeAddFoodModal() {
-      this.showAddModal = false;
-      this.resetNewFood();  // 重置输入框
-    },
-
-    // 重置新增美食的输入框
-    resetNewFood() {
-      this.newFood.foodName = '';
-      this.newFood.description = '';
-      this.newFood.ingredients = '';
-      this.newFood.imageUrl = '';
-      this.newFood.origin = '';
-    },
-
-    // 提交添加美食
-    async addFood() {
-      try {
-        const response = await axios.post('/api/local-foods', this.newFood);
-        if (response.data === 1) {  // 假设返回值 1 表示成功
-          this.fetchFoodList();  // 重新获取美食列表
-          this.closeAddFoodModal();  // 关闭弹窗
+        loading.value = true
+        const response = await axios.get('/api/local-foods', { withCredentials: true })
+        if (response.data.code === 200) {
+          foods.value = response.data.data
         } else {
-          alert('添加失败，请稍后重试');
+          throw new Error(response.data.message || '获取数据失败')
         }
-      } catch (error) {
-        console.error('添加美食失败:', error);
+      } catch (err) {
+        error.value = err.message || '获取美食数据时出错'
+      } finally {
+        loading.value = false
       }
     }
+
+    const viewDetails = (foodId) => {
+      // 跳转到详情页面，假设详情页的路由是 `/food/:id`
+      // 你可以根据自己的路由配置修改这里的代码
+      window.location.href = `/food/${foodId}`
+    }
+
+    onMounted(() => {
+      fetchFoods()
+    })
+
+    return { foods, loading, error, viewDetails }
   }
-};
+}
 </script>
 
 <style scoped>
-.food-page {
-  padding: 20px;
+.food-display-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  padding: 40px;
 }
 
-.food-list {
-  display: flex;
-  flex-direction: column;  /* 改为垂直排列 */
-  gap: 20px;
-}
-
-.food-item {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: var(--bg-100);
+.food-card {
   width: 100%;
-  max-width: 600px;  /* 限制最大宽度 */
-  margin: 0 auto;  /* 居中显示 */
+  max-width: 350px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-card-inner {
+  position: relative;
+}
+
+.food-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .food-image {
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  margin-right: 20px;
+  border-radius: 20px 20px 0 0;
 }
 
-.food-info h3 {
-  margin: 0;
-  color: var(--primary-100);
+.food-details {
+  padding: 20px;
+  background: #fff;
+  border-radius: 0 0 20px 20px;
+  text-align: center;
 }
 
-.food-info p {
-  margin: 5px 0;
-  color: var(--text-200);
+.food-name {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
 }
 
-button {
-  background-color: var(--primary-100);
-  color: white;
-  padding: 10px 15px;
+.food-description {
+  font-size: 1.1rem;
+  color: #777;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.food-origin, .food-ingredients {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 8px;
+}
+
+.food-card:hover .food-name {
+  color: #ff6347;
+}
+
+.food-card:hover .food-description {
+  color: #555;
+}
+
+.loading-spinner {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ff6347;
+}
+
+/* 按钮样式 */
+.view-details-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #ff6347;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: var(--primary-200);
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  background-color: var(--bg-100);
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content input,
-.modal-content textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid var(--primary-100);
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.modal-content button {
-  width: 100%;
-  background-color: var(--accent-100);
-}
-
-.modal-content button:hover {
-  background-color: var(--accent-200);
+.view-details-btn:hover {
+  background-color: #ff4500;
 }
 </style>
