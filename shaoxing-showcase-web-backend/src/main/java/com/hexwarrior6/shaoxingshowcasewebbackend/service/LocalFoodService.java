@@ -19,4 +19,6 @@ public interface LocalFoodService {
 
     // 获取所有家乡美食
     List<LocalFood> getAllLocalFoods();
+
+    List<LocalFood> searchLocalFoodByName(String name);
 }

@@ -43,4 +43,9 @@ public class LocalFoodServiceImpl implements LocalFoodService {
     public List<LocalFood> getAllLocalFoods() {
         return localFoodMapper.findAll();
     }
+
+    @Override
+    public List<LocalFood> searchLocalFoodByName(String name) {
+        return localFoodMapper.searchByName(name);
+    }
 }

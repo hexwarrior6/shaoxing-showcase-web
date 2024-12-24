@@ -57,4 +57,10 @@ public class LocalFoodController {
     public RestBean<List<LocalFood>> getAllLocalFoods() {
         return RestBean.success(localFoodService.getAllLocalFoods());
     }
+
+    // 获取指定ID的美食
+    @GetMapping("/search/{name}")
+    public RestBean<List<LocalFood>> searchLocalFood(@PathVariable String name) {
+        return RestBean.success(localFoodService.searchLocalFoodByName(name));
+    }
 }

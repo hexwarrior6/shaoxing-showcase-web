@@ -1,23 +1,36 @@
 <template>
-  <div class="food-display-container" v-if="!loading && !error">
-    <div class="food-card" v-for="food in foods" :key="food.id">
-      <div class="food-card-inner">
-        <img :src="`/image/${food.imageUrl}`"
-             :alt="food.foodName"
-             class="food-image"/>
-        <div class="food-details">
-          <h2 class="food-name">{{ food.foodName }}</h2>
-          <p class="food-description">{{ food.description }}</p>
-          <p class="food-origin">原产地: {{ food.origin }}</p>
-          <p class="food-ingredients">主要食材: {{ food.ingredients }}</p>
-          <!-- 添加按钮 -->
-          <button @click="viewDetails(food.id)" class="view-details-btn">查看详情</button>
+  <div class="food-container">
+    <!-- 搜索框和添加按钮放在这里 -->
+    <div class="top-bar">
+      <!-- 搜索框 -->
+      <input type="text" v-model="searchQuery" @input="searchFoods" class="search-input" placeholder="搜索食物..."/>
+
+      <!-- 添加按钮 -->
+      <button @click="addFood" class="add-button">添加</button>
+    </div>
+
+    <!-- 食物展示部分 -->
+    <div class="food-display-container" v-if="!loading && !error">
+      <div class="food-card" v-for="food in foods" :key="food.id">
+        <div class="food-card-inner">
+          <img :src="`/image/${food.imageUrl}`"
+               :alt="food.foodName"
+               class="food-image"/>
+          <div class="food-details">
+            <h2 class="food-name">{{ food.foodName }}</h2>
+            <p class="food-description">{{ food.description }}</p>
+            <p class="food-origin">原产地: {{ food.origin }}</p>
+            <p class="food-ingredients">主要食材: {{ food.ingredients }}</p>
+            <button @click="viewDetails(food.id)" class="view-details-btn">查看详情</button>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- 加载中和错误消息 -->
+    <div v-if="loading" class="loading-spinner">加载中...</div>
+    <div v-if="error" class="error-message">{{ error }}</div>
   </div>
-  <div v-if="loading" class="loading-spinner">加载中...</div>
-  <div v-if="error" class="error-message">{{ error }}</div>
 </template>
 
 <script>
@@ -29,6 +42,7 @@ export default {
     const foods = ref([])
     const loading = ref(false)
     const error = ref(null)
+    const searchQuery = ref('')
 
     const fetchFoods = async () => {
       try {
@@ -47,27 +61,76 @@ export default {
     }
 
     const viewDetails = (foodId) => {
-      // 跳转到详情页面，假设详情页的路由是 `/food/:id`
-      // 你可以根据自己的路由配置修改这里的代码
       window.location.href = `/food/${foodId}`
+    }
+
+    const searchFoods = () => {
+      console.log('搜索食物:', searchQuery.value)
+      // 这里可以实现过滤功能或者直接调用后端API进行搜索
+    }
+
+    const addFood = () => {
+      // 添加新食物的逻辑
+      console.log('添加新食物')
+      window.location.href = '/food/add'  // 跳转到添加食物页面
     }
 
     onMounted(() => {
       fetchFoods()
     })
 
-    return { foods, loading, error, viewDetails }
+    return { foods, loading, error, searchQuery, viewDetails, searchFoods, addFood }
   }
 }
 </script>
 
 <style scoped>
+.food-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #ff6347;
+}
+
+.add-button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #ff6347;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #ff4500;
+}
+
 .food-display-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
   justify-items: center;
   padding: 40px;
+  background: linear-gradient(135deg, #f1f1f1 30%, #e2e2e2);
 }
 
 .food-card {
@@ -144,7 +207,6 @@ export default {
   color: #ff6347;
 }
 
-/* 按钮样式 */
 .view-details-btn {
   display: inline-block;
   margin-top: 15px;
