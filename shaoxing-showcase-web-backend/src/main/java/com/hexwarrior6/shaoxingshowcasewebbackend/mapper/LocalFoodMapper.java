@@ -24,5 +24,8 @@ public interface LocalFoodMapper {
 
     @Select("SELECT * FROM local_foods")
     List<LocalFood> findAll();
+
+    @Select("SELECT * FROM local_foods WHERE food_name LIKE CONCAT('%', #{name}, '%')")
+    List<LocalFood> searchByName(String name);
 }
 
