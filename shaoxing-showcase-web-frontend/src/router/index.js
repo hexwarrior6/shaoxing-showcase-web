@@ -28,6 +28,12 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: HomePage,
+        meta: {requiresAuth: true},  // 需要登录才能访问
+    },
+    {
+        path: '/not-found',
+        name: 'not-found',
+        component: () => import('@/views/NotFoundView.vue'),
     },
     {
         path: '/:pathMatch(.*)*',
@@ -38,6 +44,22 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
+});
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+    const username = localStorage.getItem('username');
+
+    // 如果路由需要认证且用户未登录，则重定向到登录页面
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (username === null) {
+            next({name: 'welcome-login'});  // 跳转到登录页面
+        } else {
+            next();  // 已登录，继续访问
+        }
+    } else {
+        next();  // 无需登录的页面，直接访问
+    }
 });
 
 export default router;
