@@ -1,6 +1,7 @@
 package com.hexwarrior6.shaoxingshowcasewebbackend.controller;
 
 import com.hexwarrior6.shaoxingshowcasewebbackend.entity.LocalFood;
+import com.hexwarrior6.shaoxingshowcasewebbackend.entity.RestBean;
 import com.hexwarrior6.shaoxingshowcasewebbackend.service.LocalFoodService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -16,32 +17,44 @@ public class LocalFoodController {
 
     // 添加美食
     @PostMapping
-    public int addLocalFood(@RequestBody LocalFood localFood) {
-        return localFoodService.addLocalFood(localFood);
+    public RestBean<String> addLocalFood(@RequestBody LocalFood localFood) {
+        if (localFoodService.addLocalFood(localFood) > 0) {
+            return RestBean.success("添加成功");
+        } else {
+            return RestBean.failure(400);
+        }
     }
 
     // 删除美食
     @DeleteMapping("/{id}")
-    public int deleteLocalFood(@PathVariable int id) {
-        return localFoodService.deleteLocalFood(id);
+    public RestBean<String> deleteLocalFood(@PathVariable int id) {
+        if (localFoodService.deleteLocalFood(id) > 0) {
+            return RestBean.success("添加成功");
+        } else {
+            return RestBean.failure(400);
+        }
     }
 
     // 更新美食
     @PutMapping("/{id}")
-    public int updateLocalFood(@PathVariable int id, @RequestBody LocalFood localFood) {
+    public RestBean<String> updateLocalFood(@PathVariable int id, @RequestBody LocalFood localFood) {
         localFood.setId(id);
-        return localFoodService.updateLocalFood(localFood);
+        if (localFoodService.updateLocalFood(localFood) > 0) {
+            return RestBean.success("添加成功");
+        } else {
+            return RestBean.failure(400);
+        }
     }
 
     // 获取指定ID的美食
     @GetMapping("/{id}")
-    public LocalFood getLocalFood(@PathVariable int id) {
-        return localFoodService.getLocalFoodById(id);
+    public RestBean<LocalFood> getLocalFood(@PathVariable int id) {
+        return RestBean.success(localFoodService.getLocalFoodById(id));
     }
 
     // 获取所有美食
     @GetMapping
-    public List<LocalFood> getAllLocalFoods() {
-        return localFoodService.getAllLocalFoods();
+    public RestBean<List<LocalFood>> getAllLocalFoods() {
+        return RestBean.success(localFoodService.getAllLocalFoods());
     }
 }
