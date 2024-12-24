@@ -20,7 +20,7 @@ const register = () => {
     if (valid) {
       post('api/auth/register', form, () => {
         ElMessage.success("注册成功")
-        router.push('/welcome/login')
+        router.push('/')
       })
     } else {
       ElMessage.warning('重新检查您的信息！')
