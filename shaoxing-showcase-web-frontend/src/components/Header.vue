@@ -8,7 +8,7 @@
       <ul>
         <li><a href="/home">首页</a></li>
         <li><a href="/personalInfo">个人介绍</a></li>
-        <li><a href="#logout">退出登录({{ username }})</a></li>
+        <li><a href="#logout" @click="logout">登出({{ username }})</a></li>
       </ul>
     </nav>
   </header>
@@ -21,7 +21,24 @@ export default {
 </script>
 
 <script setup>
+import {ElMessage} from "element-plus";
+import router from "@/router/index.js";
+import {get} from "@/net";
+
 const username = localStorage.getItem('username')
+
+const logout = () => {
+  try {
+    get('/api/auth/logout', (code, data, message) => {
+      localStorage.removeItem('username');  // 清除登录状态
+      ElMessage.success("退出成功：" + data);
+      router.push("/")
+    })
+  } catch (error) {
+    ElMessage.error("退出失败：" + error.message);
+  }
+}
+
 </script>
 
 <style scoped>
