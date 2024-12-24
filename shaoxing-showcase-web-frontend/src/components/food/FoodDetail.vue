@@ -235,4 +235,12 @@ footer {
 footer p {
   margin: 5px 0;
 }
+/* 按钮容器 */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
 </style>

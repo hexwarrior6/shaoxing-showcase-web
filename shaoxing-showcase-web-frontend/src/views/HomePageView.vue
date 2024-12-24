@@ -4,7 +4,7 @@
     <div class="main-content">
       <Sidebar @load-content="loadContent" />
       <div class="content-display">
-        <div v-if="content === 'food'">
+        <div v-if="content === 'food' || content === ''">
           <food-page />
         </div>
         <div v-if="content === 'scenery'">
@@ -73,7 +73,7 @@ body {
   --accent-200: #005461;
   --text-100: #1a1a1a;
   --text-200: #404040;
-  --bg-100: #ffffff;
+  --bg-100: #c81111;
   --bg-200: #f5f5f5;
   --bg-300: #cccccc;
 }
