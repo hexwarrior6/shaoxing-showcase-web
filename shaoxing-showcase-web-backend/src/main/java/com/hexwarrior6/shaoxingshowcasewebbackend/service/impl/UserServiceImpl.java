@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Deprecated
 @Service
 public class UserServiceImpl implements UserService {
     @Resource

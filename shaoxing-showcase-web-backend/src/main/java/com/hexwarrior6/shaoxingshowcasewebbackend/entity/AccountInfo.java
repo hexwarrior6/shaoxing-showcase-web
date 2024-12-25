@@ -9,4 +9,5 @@ public class AccountInfo {
     private String id;
     private String username;
     private String email;
+    private String avatarUrl;
 }

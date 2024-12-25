@@ -26,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Boolean resetPassword(String email, String password) {
         String encodedPassword = passwordEncoder.encode(password);
-        return accountMapper.updateAccountByEmail(new Account().setEmail(email).setPassword(encodedPassword)) == 1;
+        return accountMapper.updatePasswordByEmail(new Account().setEmail(email).setPassword(encodedPassword)) == 1;
     }
 
     @Override

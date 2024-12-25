@@ -3,6 +3,7 @@ package com.hexwarrior6.shaoxingshowcasewebbackend.entity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+@Deprecated
 @Data
 @Accessors(chain = true)
 public class User {
