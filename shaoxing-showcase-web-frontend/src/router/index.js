@@ -3,6 +3,7 @@ import HomePage from '../views/HomePageView.vue';
 import FoodDetail from "@/views/food/FoodDetail.vue";
 import FoodAdd from "@/views/food/FoodAdd.vue";
 import FoodEdit from "@/views/food/FoodEdit.vue";
+import UserInfoView from "@/views/UserInfoView.vue";
 
 const routes = [
     {
@@ -50,6 +51,10 @@ const routes = [
                 component: FoodEdit,
             }
         ]
+    },{
+    path: '/user-info',
+        name: 'user-info',
+        component: UserInfoView,
     }, {
         path: '/not-found',
         name: 'not-found',

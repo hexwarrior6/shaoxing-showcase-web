@@ -7,7 +7,7 @@
     <nav class="navbar">
       <ul>
         <li><a href="/home">首页</a></li>
-        <li><a href="/personalInfo">个人介绍</a></li>
+        <li><a href="/user-info">用户信息</a></li>
         <li><a href="#logout" @click="logout">登出({{ username }})</a></li>
       </ul>
     </nav>
