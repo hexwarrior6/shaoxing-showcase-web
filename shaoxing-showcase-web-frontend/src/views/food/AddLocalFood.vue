@@ -33,13 +33,13 @@
               :limit="1"
               :auto-upload="false"
           >
-            <el-button slot="trigger" size="small" type="primary">选择图片</el-button>
+            <el-button slot="trigger" size="default" type="primary">选择图片</el-button>
           </el-upload>
         </div>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm" :loading="loading">提交</el-button>
+        <el-button type="primary" @click="submitForm" :loading="loading"><el-icon size="large" style="margin-right: 10px"><FolderChecked/></el-icon>提交</el-button>
       </el-form-item>
     </el-form>
   </div>

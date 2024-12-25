@@ -7,6 +7,7 @@ import router from './router'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import axios from "axios";
+import ElementPlus from 'element-plus'
 
 const app = createApp(App)
 
@@ -18,5 +19,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 app.use(createPinia())
 app.use(router)
+app.use(ElementPlus, {
+  size: 'large'
+})
 
 app.mount('#app')
