@@ -19,4 +19,7 @@ public interface LocalSightService {
 
     // 查询所有景点记录
     List<LocalSight> getAllLocalSights();
+
+    // 搜索景点
+    List<LocalSight> searchLocalSightsByName(String name);
 }

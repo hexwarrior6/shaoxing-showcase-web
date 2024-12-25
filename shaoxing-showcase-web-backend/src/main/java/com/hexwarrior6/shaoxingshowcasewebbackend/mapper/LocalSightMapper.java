@@ -24,4 +24,7 @@ public interface LocalSightMapper {
 
     @Select("SELECT * FROM local_sights")
     List<LocalSight> findAll();
+
+    @Select("SELECT * FROM local_sights WHERE sight_name LIKE CONCAT('%', #{name}, '%')")
+    List<LocalSight> searchByName(String name);
 }

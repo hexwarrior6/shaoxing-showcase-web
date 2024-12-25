@@ -44,5 +44,10 @@ public class LocalSightServiceImpl implements LocalSightService {
     public List<LocalSight> getAllLocalSights() {
         return localSightMapper.findAll();
     }
+
+    @Override
+    public List<LocalSight> searchLocalSightsByName(String name) {
+        return localSightMapper.searchByName(name);
+    }
 }
 
