@@ -28,7 +28,7 @@
         </el-icon>
         编辑
       </el-button>
-      <el-button style="font-size: larger; padding: 20px" type="danger" plain>
+      <el-button style="font-size: larger; padding: 20px" type="danger" plain @click="confirmDelete">
         <el-icon style="margin-right: 10px">
           <Delete/>
         </el-icon>
@@ -48,6 +48,7 @@
 import {onMounted, ref, watch} from 'vue';
 import axios from 'axios';
 import {useRoute} from 'vue-router';
+import {ElMessageBox, ElMessage} from 'element-plus';
 import Footer from "@/components/home/Footer.vue";
 import Header from "@/components/home/Header.vue";
 
@@ -55,11 +56,10 @@ export default {
   name: 'FoodDetail',
   components: {Header, Footer},
   setup() {
-    const food = ref(null); // 用于存储美食数据
-    const route = useRoute(); // 获取当前路由对象
-    const foodId = route.params.id; // 从 URL 获取 id 参数
+    const food = ref(null);
+    const route = useRoute();
+    const foodId = route.params.id;
 
-    // 请求函数
     const fetchFoodData = () => {
       axios.get(`/api/local-foods/${foodId}`, {withCredentials: true})
           .then(response => {
@@ -78,18 +78,43 @@ export default {
       window.location.href = `/food/edit/${foodId}`
     }
 
-    // 在组件挂载时发起请求
+    const confirmDelete = () => {
+      ElMessageBox.confirm('确定要删除这道美食吗？', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        axios.delete(`/api/local-foods/${foodId}`, {withCredentials: true})
+          .then(response => {
+            if (response.data.code === 200) {
+              ElMessage.success('删除成功');
+              window.location.href = '/home';
+            } else {
+              ElMessage.error('删除失败');
+            }
+          })
+          .catch(error => {
+            console.error('删除请求失败', error);
+            ElMessage.error('删除过程中出现错误');
+          });
+      }).catch(() => {
+        ElMessage({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    }
+
     onMounted(() => {
       fetchFoodData();
     });
 
-    // 监听 URL 参数变化（如果 id 变化）
     watch(() => route.params.id, (newId) => {
-      food.value = null; // 清空之前的数据
-      fetchFoodData(); // 重新请求新的数据
+      food.value = null;
+      fetchFoodData();
     });
 
-    return {food, editFood};
+    return {food, editFood, confirmDelete};
   }
 };
 </script>
