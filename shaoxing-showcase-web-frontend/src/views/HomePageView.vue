@@ -1,23 +1,19 @@
 <template>
   <div class="app-container">
-    <Header />
+    <Header/>
     <div class="main-content">
-      <Sidebar @load-content="loadContent" />
+      <Sidebar @load-content="loadContent"/>
       <div class="content-display">
-        <div v-if="content === 'food' || content === ''">
-          <food-page />
-        </div>
-        <div v-if="content === 'scenery'">
-          <h2>家乡景点</h2>
-          <p>这里展示家乡景点...</p>
-        </div>
-        <div v-if="content === 'culture'">
-          <h2>家乡文化</h2>
-          <p>这里展示家乡文化...</p>
-        </div>
+        <transition name="el-zoom-in-left" mode="out-in">
+          <component
+              :is="getCurrentComponent"
+              :key="content"
+          />
+        </transition>
       </div>
+
     </div>
-    <Footer />
+    <Footer/>
   </div>
 </template>
 
@@ -25,12 +21,26 @@
 import Header from '@/components/home/Header.vue';
 import Sidebar from '@/components/home/Sidebar.vue';
 import Footer from '@/components/home/Footer.vue';
-import FoodPage from "@/components/home/FoodList.vue";
+import FoodList from "@/components/home/FoodList.vue";
 
 export default {
+  computed: {
+    getCurrentComponent() {
+      switch (this.content) {
+        case 'food':
+          return 'FoodList'
+        case 'scenery':
+          return 'SceneryList'
+        case 'culture':
+          return 'CultureList'
+        default:
+          return 'FoodList'
+      }
+    }
+  },
   name: 'HomePage',
   components: {
-    FoodPage,
+    FoodList,
     Header,
     Sidebar,
     Footer,
