@@ -22,6 +22,7 @@ import Header from '@/components/home/Header.vue';
 import Sidebar from '@/components/home/Sidebar.vue';
 import Footer from '@/components/home/Footer.vue';
 import FoodList from "@/components/home/FoodList.vue";
+import SceneryList from "@/components/home/SceneryList.vue";
 
 export default {
   computed: {
@@ -41,6 +42,7 @@ export default {
   name: 'HomePage',
   components: {
     FoodList,
+    SceneryList,
     Header,
     Sidebar,
     Footer,
