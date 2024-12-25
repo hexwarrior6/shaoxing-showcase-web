@@ -4,6 +4,9 @@ import FoodDetail from "@/views/food/FoodDetail.vue";
 import FoodAdd from "@/views/food/FoodAdd.vue";
 import FoodEdit from "@/views/food/FoodEdit.vue";
 import UserInfoView from "@/views/UserInfoView.vue";
+import SceneryDetail from "@/views/scenery/SceneryDetail.vue";
+import SceneryEdit from "@/views/scenery/SceneryEdit.vue";
+import SceneryAdd from "@/views/scenery/SceneryAdd.vue";
 
 const routes = [
     {
@@ -51,8 +54,27 @@ const routes = [
                 component: FoodEdit,
             }
         ]
-    },{
-    path: '/user-info',
+    }, {
+        path: '/scenery',
+        name: 'Scenery',
+        meta: {requiresAuth: true},  // 需要登录才能访问
+        children: [
+            {
+                path: 'detail/:id', // :id 是动态参数
+                name: 'SceneryDetail',
+                component: SceneryDetail,
+            }, {
+                path: 'add',
+                name: 'SceneryAdd',
+                component: SceneryAdd,
+            }, {
+                path: 'edit/:id',
+                name: 'SceneryEdit',
+                component: SceneryEdit,
+            }
+        ]
+    }, {
+        path: '/user-info',
         name: 'user-info',
         component: UserInfoView,
     }, {

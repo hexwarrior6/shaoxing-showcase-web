@@ -39,7 +39,12 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm" :loading="loading"><el-icon size="large" style="margin-right: 10px"><FolderChecked/></el-icon>提交</el-button>
+        <el-button type="primary" @click="submitForm" :loading="loading">
+          <el-icon size="large" style="margin-right: 10px">
+            <FolderChecked/>
+          </el-icon>
+          提交
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
