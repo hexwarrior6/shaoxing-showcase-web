@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import HomePage from '../views/HomePageView.vue';
-import FoodDetail from "@/components/food/FoodDetail.vue";
+import FoodDetail from "@/views/food/FoodDetail.vue";
+import AddLocalFood from "@/views/food/AddLocalFood.vue";
 
 const routes = [
     {
@@ -44,6 +45,12 @@ const routes = [
         path: '/food/:id', // :id 是动态参数
         name: 'FoodDetail',
         component: FoodDetail,
+        meta: {requiresAuth: true},
+    },
+    {
+        path: '/add-food', // :id 是动态参数
+        name: 'AddLocalFood',
+        component: AddLocalFood,
         meta: {requiresAuth: true},
     },
 ];
