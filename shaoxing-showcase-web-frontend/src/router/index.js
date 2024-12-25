@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import HomePage from '../views/HomePageView.vue';
 import FoodDetail from "@/views/food/FoodDetail.vue";
-import AddLocalFood from "@/views/food/AddLocalFood.vue";
+import FoodAdd from "@/views/food/FoodAdd.vue";
 
 const routes = [
     {
@@ -25,34 +25,34 @@ const routes = [
                 component: () => import('@/components/welcome/ResetPasswordPage.vue'),
             },
         ],
-    },
-    {
+    }, {
         path: '/home',
         name: 'Home',
         component: HomePage,
         meta: {requiresAuth: true},  // 需要登录才能访问
-    },
-    {
+    }, {
+        path: '/food',
+        name: 'Food',
+        meta: {requiresAuth: true},  // 需要登录才能访问
+        children: [
+            {
+                path: 'detail/:id', // :id 是动态参数
+                name: 'FoodDetail',
+                component: FoodDetail,
+            }, {
+                path: 'add',
+                name: 'FoodAdd',
+                component: FoodAdd,
+            }
+        ]
+    }, {
         path: '/not-found',
         name: 'not-found',
         component: () => import('@/views/NotFoundView.vue'),
-    },
-    {
+    }, {
         path: '/:pathMatch(.*)*',
         redirect: '/not-found',  // 未找到页面时重定向到 /not-found
-    },
-    {
-        path: '/food/:id', // :id 是动态参数
-        name: 'FoodDetail',
-        component: FoodDetail,
-        meta: {requiresAuth: true},
-    },
-    {
-        path: '/add-food', // :id 是动态参数
-        name: 'AddLocalFood',
-        component: AddLocalFood,
-        meta: {requiresAuth: true},
-    },
+    }
 ];
 
 const router = createRouter({

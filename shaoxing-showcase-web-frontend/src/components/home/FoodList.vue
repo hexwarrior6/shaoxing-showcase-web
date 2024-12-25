@@ -88,13 +88,13 @@ export default {
 
     // 查看详情
     const viewDetails = (foodId) => {
-      window.location.href = `/food/${foodId}`
+      window.location.href = `/food/detail/${foodId}`
     }
 
     // 添加美食
     const addFood = () => {
       console.log('添加美食')
-      window.location.href = '/add-food'
+      window.location.href = '/food/add'
     }
 
     onMounted(() => {
