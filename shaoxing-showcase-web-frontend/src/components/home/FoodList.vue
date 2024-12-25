@@ -7,7 +7,7 @@
 
       <!-- 搜索框和按钮右对齐 -->
       <div class="search-wrapper">
-        <input type="text" v-model="searchQuery" class="search-input" placeholder="搜索美食..." />
+        <input type="text" v-model="searchQuery" class="search-input" placeholder="搜索美食..."/>
         <button @click="searchFoods" class="search-button">搜索</button>
         <button @click="addFood" class="add-button">添加</button>
       </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { ref, onMounted} from 'vue'
+import {onMounted, ref} from 'vue'
 import axios from 'axios'
 
 export default {
@@ -94,7 +94,7 @@ export default {
     // 添加美食
     const addFood = () => {
       console.log('添加美食')
-      window.location.href = '/food/add'
+      window.location.href = '/add-food'
     }
 
     onMounted(() => {
@@ -114,8 +114,8 @@ export default {
 
 .top-bar {
   display: flex;
-  align-items: center;  /* 垂直居中对齐 */
-  justify-content: flex-start;  /* 让“家乡美食”在左侧 */
+  align-items: center; /* 垂直居中对齐 */
+  justify-content: flex-start; /* 让“家乡美食”在左侧 */
   margin-bottom: 20px;
 }
 
@@ -130,7 +130,7 @@ export default {
 .search-wrapper {
   display: flex;
   gap: 10px;
-  margin-left: auto;  /* 将搜索框和按钮右对齐 */
+  margin-left: auto; /* 将搜索框和按钮右对齐 */
 }
 
 .search-input {
@@ -274,4 +274,44 @@ export default {
 .view-details-btn:hover {
   background-color: #ff4500;
 }
+
+.food-container,
+.food-display-container {
+  border-radius: 10px; /* Uniform roundness for both containers */
+}
+
+.food-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #fafafa 30%, #FDFDFD);
+  position: relative;
+  z-index: 1;
+  box-shadow: none; /* Ensure no shadow is applied */
+}
+
+.food-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  filter: blur(5px);
+  pointer-events: none;
+  box-shadow: none; /* Ensure no shadow is applied to the pseudo-element */
+  border-radius: 10px; /* Match the container's border-radius */
+}
+
+.food-display-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #f9f9f9 30%, #f2f2f2);
+  position: relative;
+  z-index: 1;
+}
+
+/* Other CSS rules remain unchanged */
 </style>
