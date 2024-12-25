@@ -94,7 +94,7 @@ export default {
     // 添加美食
     const addFood = () => {
       console.log('添加美食')
-      window.location.href = '/food/add'
+      window.location.href = '/add-food'
     }
 
     onMounted(() => {
@@ -274,4 +274,43 @@ export default {
 .view-details-btn:hover {
   background-color: #ff4500;
 }
+.food-container,
+.food-display-container {
+  border-radius: 10px; /* Uniform roundness for both containers */
+}
+
+.food-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #fafafa 30%, #FDFDFD);
+  position: relative;
+  z-index: 1;
+  box-shadow: none; /* Ensure no shadow is applied */
+}
+
+.food-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  filter: blur(5px);
+  pointer-events: none;
+  box-shadow: none; /* Ensure no shadow is applied to the pseudo-element */
+  border-radius: 10px; /* Match the container's border-radius */
+}
+
+.food-display-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #f9f9f9 30%, #f2f2f2);
+  position: relative;
+  z-index: 1;
+}
+
+/* Other CSS rules remain unchanged */
 </style>
