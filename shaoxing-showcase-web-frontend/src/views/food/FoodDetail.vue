@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header/>
   <div class="food-detail-container" v-if="food">
     <div class="food-header">
       <h1 class="food-name">{{ food.foodName }}</h1>
@@ -22,22 +22,32 @@
 
     <!-- 底部按钮 -->
     <div class="button-container">
-      <el-button style="font-size: larger; padding: 20px" type="primary" plain><el-icon style="margin-right: 10px"><Edit /></el-icon>编辑</el-button>
-      <el-button style="font-size: larger; padding: 20px" type="danger" plain><el-icon style="margin-right: 10px"><Delete /></el-icon>删除</el-button>
+      <el-button style="font-size: larger; padding: 20px" type="primary" plain @click="editFood(food.id)">
+        <el-icon style="margin-right: 10px">
+          <Edit/>
+        </el-icon>
+        编辑
+      </el-button>
+      <el-button style="font-size: larger; padding: 20px" type="danger" plain>
+        <el-icon style="margin-right: 10px">
+          <Delete/>
+        </el-icon>
+        删除
+      </el-button>
     </div>
   </div>
 
   <div v-else class="loading">
     <span class="loading-text">加载中...</span>
   </div>
-  <Footer />
+  <Footer/>
 </template>
 
 
 <script>
-import { ref, onMounted, watch } from 'vue';
+import {onMounted, ref, watch} from 'vue';
 import axios from 'axios';
-import { useRoute } from 'vue-router';
+import {useRoute} from 'vue-router';
 import Footer from "@/components/home/Footer.vue";
 import Header from "@/components/home/Header.vue";
 
@@ -64,6 +74,10 @@ export default {
           });
     };
 
+    const editFood = (foodId) => {
+      window.location.href = `/food/edit/${foodId}`
+    }
+
     // 在组件挂载时发起请求
     onMounted(() => {
       fetchFoodData();
@@ -75,9 +89,7 @@ export default {
       fetchFoodData(); // 重新请求新的数据
     });
 
-    return {
-      food
-    };
+    return {food, editFood};
   }
 };
 </script>
@@ -235,6 +247,7 @@ footer {
 footer p {
   margin: 5px 0;
 }
+
 /* 按钮容器 */
 .button-container {
   display: flex;
