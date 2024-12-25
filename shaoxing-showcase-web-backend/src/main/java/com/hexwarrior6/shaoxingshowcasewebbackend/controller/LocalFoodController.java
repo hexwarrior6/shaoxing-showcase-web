@@ -29,7 +29,7 @@ public class LocalFoodController {
     @DeleteMapping("/{id}")
     public RestBean<String> deleteLocalFood(@PathVariable int id) {
         if (localFoodService.deleteLocalFood(id) > 0) {
-            return RestBean.success("添加成功");
+            return RestBean.success("删除成功");
         } else {
             return RestBean.failure(400);
         }
@@ -40,7 +40,7 @@ public class LocalFoodController {
     public RestBean<String> updateLocalFood(@PathVariable int id, @RequestBody LocalFood localFood) {
         localFood.setId(id);
         if (localFoodService.updateLocalFood(localFood) > 0) {
-            return RestBean.success("添加成功");
+            return RestBean.success("更新成功");
         } else {
             return RestBean.failure(400);
         }
@@ -58,7 +58,7 @@ public class LocalFoodController {
         return RestBean.success(localFoodService.getAllLocalFoods());
     }
 
-    // 获取指定ID的美食
+    // 搜索美食
     @GetMapping("/search/{name}")
     public RestBean<List<LocalFood>> searchLocalFood(@PathVariable String name) {
         return RestBean.success(localFoodService.searchLocalFoodByName(name));
