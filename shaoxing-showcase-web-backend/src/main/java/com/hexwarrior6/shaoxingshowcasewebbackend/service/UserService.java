@@ -4,6 +4,7 @@ import com.hexwarrior6.shaoxingshowcasewebbackend.entity.User;
 
 import java.util.List;
 
+@Deprecated
 public interface UserService {
     // 添加用户
     int addUser(User user);
