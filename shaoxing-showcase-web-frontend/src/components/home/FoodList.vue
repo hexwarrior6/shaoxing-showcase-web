@@ -1,18 +1,19 @@
 <template>
   <div class="food-container">
-    <!-- 搜索框和添加按钮放在这里 -->
+    <!-- 顶部工具栏 -->
     <div class="top-bar">
-      <!-- 搜索框 -->
-      <input type="text" v-model="searchQuery" class="search-input" placeholder="搜索食物..." />
+      <!-- 在搜索框左侧添加“家乡美食”文本 -->
+      <span class="home-food-label">家乡美食</span>
 
-      <!-- 搜索按钮 -->
-      <button @click="searchFoods" class="search-button">搜索</button>
-
-      <!-- 添加按钮 -->
-      <button @click="addFood" class="add-button">添加</button>
+      <!-- 搜索框和按钮右对齐 -->
+      <div class="search-wrapper">
+        <input type="text" v-model="searchQuery" class="search-input" placeholder="搜索美食..." />
+        <button @click="searchFoods" class="search-button">搜索</button>
+        <button @click="addFood" class="add-button">添加</button>
+      </div>
     </div>
 
-    <!-- 食物展示部分 -->
+    <!-- 美食展示容器 -->
     <div class="food-display-container" v-if="!loading && !error">
       <div class="food-card" v-for="food in foods" :key="food.id">
         <div class="food-card-inner">
@@ -22,15 +23,15 @@
           <div class="food-details">
             <h2 class="food-name">{{ food.foodName }}</h2>
             <p class="food-description">{{ food.description }}</p>
-            <p class="food-origin">原产地: {{ food.origin }}</p>
-            <p class="food-ingredients">主要食材: {{ food.ingredients }}</p>
+            <p class="food-origin">产地: {{ food.origin }}</p>
+            <p class="food-ingredients">常见食材: {{ food.ingredients }}</p>
             <button @click="viewDetails(food.id)" class="view-details-btn">查看详情</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 加载中和错误消息 -->
+    <!-- 加载中和错误提示 -->
     <div v-if="loading" class="loading-spinner">加载中...</div>
     <div v-if="error" class="error-message">{{ error }}</div>
   </div>
@@ -42,12 +43,12 @@ import axios from 'axios'
 
 export default {
   setup() {
-    const foods = ref([])  // 存储食物数据
-    const loading = ref(false)  // 加载状态
+    const foods = ref([])  // 存储美食数据
+    const loading = ref(false)  // 加载中标志
     const error = ref(null)  // 错误信息
-    const searchQuery = ref('')  // 搜索关键词
+    const searchQuery = ref('')  // 搜索查询关键字
 
-    // 获取食物数据
+    // 获取美食数据
     const fetchFoods = async () => {
       try {
         loading.value = true
@@ -58,17 +59,16 @@ export default {
           throw new Error(response.data.message || '获取数据失败')
         }
       } catch (err) {
-        error.value = err.message || '获取美食数据时出错'
+        error.value = err.message || '获取数据过程中出现错误'
       } finally {
         loading.value = false
       }
     }
 
-    // 根据搜索关键词进行搜索
+    // 根据搜索关键字搜索美食
     const searchFoods = async () => {
       if (searchQuery.value.trim() === '') {
-        // 如果没有输入搜索关键词，重新加载所有食物
-        await fetchFoods()
+        await fetchFoods()  // 如果没有输入搜索内容，则重新加载所有数据
       } else {
         try {
           loading.value = true
@@ -79,7 +79,7 @@ export default {
             throw new Error(response.data.message || '搜索失败')
           }
         } catch (err) {
-          error.value = err.message || '搜索食物时出错'
+          error.value = err.message || '搜索美食时发生错误'
         } finally {
           loading.value = false
         }
@@ -91,14 +91,14 @@ export default {
       window.location.href = `/food/${foodId}`
     }
 
-    // 添加食物
+    // 添加美食
     const addFood = () => {
-      console.log('添加新食物')
-      window.location.href = '/food/add'  // 跳转到添加食物页面
+      console.log('添加美食')
+      window.location.href = '/food/add'
     }
 
     onMounted(() => {
-      fetchFoods()  // 页面加载时获取食物数据
+      fetchFoods()  // 页面加载时获取美食数据
     })
 
     return {foods, loading, error, searchQuery, searchFoods, addFood, viewDetails}
@@ -114,9 +114,23 @@ export default {
 
 .top-bar {
   display: flex;
-  justify-content: flex-end;
-  gap: 20px;
+  align-items: center;  /* 垂直居中对齐 */
+  justify-content: flex-start;  /* 让“家乡美食”在左侧 */
   margin-bottom: 20px;
+}
+
+.home-food-label {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-left: 5px;
+  font-family: 'DingTalk JinBuTi', sans-serif;
+}
+
+.search-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;  /* 将搜索框和按钮右对齐 */
 }
 
 .search-input {
