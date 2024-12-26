@@ -23,6 +23,7 @@ import Sidebar from '@/components/home/Sidebar.vue';
 import Footer from '@/components/home/Footer.vue';
 import FoodList from "@/components/home/FoodList.vue";
 import SceneryList from "@/components/home/SceneryList.vue";
+import CultureList from "@/components/home/CultureList.vue";
 
 export default {
   computed: {
@@ -43,6 +44,7 @@ export default {
   components: {
     FoodList,
     SceneryList,
+    CultureList,
     Header,
     Sidebar,
     Footer,
