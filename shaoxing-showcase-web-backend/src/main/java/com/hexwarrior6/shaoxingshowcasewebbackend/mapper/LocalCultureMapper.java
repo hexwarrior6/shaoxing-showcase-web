@@ -1,6 +1,7 @@
 package com.hexwarrior6.shaoxingshowcasewebbackend.mapper;
 
 import com.hexwarrior6.shaoxingshowcasewebbackend.entity.LocalCulture;
+import com.hexwarrior6.shaoxingshowcasewebbackend.entity.LocalFood;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -24,4 +25,7 @@ public interface LocalCultureMapper {
 
     @Select("SELECT * FROM local_culture")
     List<LocalCulture> findAll();
+
+    @Select("SELECT * FROM local_culture WHERE culture_name LIKE CONCAT('%', #{name}, '%')")
+    List<LocalCulture> searchByName(String name);
 }

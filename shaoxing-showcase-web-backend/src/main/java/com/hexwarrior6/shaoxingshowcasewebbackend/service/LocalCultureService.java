@@ -19,4 +19,6 @@ public interface LocalCultureService {
 
     // 查询所有文化活动记录
     List<LocalCulture> getAllLocalCultures();
+
+    List<LocalCulture> searchLocalCulturesByName(String name);
 }

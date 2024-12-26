@@ -42,4 +42,10 @@ public class LocalCultureServiceImpl implements LocalCultureService {
     public List<LocalCulture> getAllLocalCultures() {
         return localCultureMapper.findAll();
     }
+
+        // 查询所有文化活动记录
+    @Override
+    public List<LocalCulture> searchLocalCulturesByName(String name) {
+        return localCultureMapper.searchByName(name);
+    }
 }

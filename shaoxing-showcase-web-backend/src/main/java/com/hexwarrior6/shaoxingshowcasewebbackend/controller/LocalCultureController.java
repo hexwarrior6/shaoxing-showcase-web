@@ -1,6 +1,8 @@
 package com.hexwarrior6.shaoxingshowcasewebbackend.controller;
 
 import com.hexwarrior6.shaoxingshowcasewebbackend.entity.LocalCulture;
+import com.hexwarrior6.shaoxingshowcasewebbackend.entity.LocalFood;
+import com.hexwarrior6.shaoxingshowcasewebbackend.entity.RestBean;
 import com.hexwarrior6.shaoxingshowcasewebbackend.service.LocalCultureService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -16,32 +18,50 @@ public class LocalCultureController {
 
     // 添加文化活动
     @PostMapping
-    public int addLocalCulture(@RequestBody LocalCulture localCulture) {
-        return localCultureService.addLocalCulture(localCulture);
+    public RestBean<String> addLocalCulture(@RequestBody LocalCulture localCulture) {
+        if (localCultureService.addLocalCulture(localCulture) > 0) {
+            return RestBean.success("添加成功");
+        } else {
+            return RestBean.failure(400);
+        }
     }
 
     // 删除文化活动
     @DeleteMapping("/{id}")
-    public int deleteLocalCulture(@PathVariable int id) {
-        return localCultureService.deleteLocalCulture(id);
+    public RestBean<String> deleteLocalCulture(@PathVariable int id) {
+        if (localCultureService.deleteLocalCulture(id) > 0) {
+            return RestBean.success("更新成功");
+        } else {
+            return RestBean.failure(400);
+        }
     }
 
     // 更新文化活动
     @PutMapping("/{id}")
-    public int updateLocalCulture(@PathVariable int id, @RequestBody LocalCulture localCulture) {
+    public RestBean<String> updateLocalCulture(@PathVariable int id, @RequestBody LocalCulture localCulture) {
         localCulture.setId(id);
-        return localCultureService.updateLocalCulture(localCulture);
+        if (localCultureService.updateLocalCulture(localCulture) > 0) {
+            return RestBean.success("更新成功");
+        } else {
+            return RestBean.failure(400);
+        }
     }
 
     // 获取指定ID的文化活动
     @GetMapping("/{id}")
-    public LocalCulture getLocalCulture(@PathVariable int id) {
-        return localCultureService.getLocalCultureById(id);
+    public RestBean<LocalCulture> getLocalCulture(@PathVariable int id) {
+        return RestBean.success(localCultureService.getLocalCultureById(id));
     }
 
     // 获取所有文化活动
     @GetMapping
-    public List<LocalCulture> getAllLocalCultures() {
-        return localCultureService.getAllLocalCultures();
+    public RestBean<List<LocalCulture>> getAllLocalCultures() {
+        return RestBean.success(localCultureService.getAllLocalCultures());
+    }
+
+    // 搜索文化活动
+    @GetMapping("/search/{name}")
+    public RestBean<List<LocalCulture>> searchLocalCulture(@PathVariable String name) {
+        return RestBean.success(localCultureService.searchLocalCulturesByName(name));
     }
 }
