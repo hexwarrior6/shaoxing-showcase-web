@@ -1,7 +1,6 @@
 package com.hexwarrior6.shaoxingshowcasewebbackend.controller;
 
 import com.hexwarrior6.shaoxingshowcasewebbackend.entity.LocalCulture;
-import com.hexwarrior6.shaoxingshowcasewebbackend.entity.LocalFood;
 import com.hexwarrior6.shaoxingshowcasewebbackend.entity.RestBean;
 import com.hexwarrior6.shaoxingshowcasewebbackend.service.LocalCultureService;
 import jakarta.annotation.Resource;
