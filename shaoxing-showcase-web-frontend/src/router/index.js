@@ -7,6 +7,9 @@ import UserInfoView from "@/views/UserInfoView.vue";
 import SceneryDetail from "@/views/scenery/SceneryDetail.vue";
 import SceneryEdit from "@/views/scenery/SceneryEdit.vue";
 import SceneryAdd from "@/views/scenery/SceneryAdd.vue";
+import CultureDetail from "@/views/culture/CultureDetail.vue";
+import CultureAdd from "@/views/culture/CultureAdd.vue";
+import CultureEdit from "@/views/culture/CultureEdit.vue";
 
 const routes = [
     {
@@ -71,6 +74,25 @@ const routes = [
                 path: 'edit/:id',
                 name: 'SceneryEdit',
                 component: SceneryEdit,
+            }
+        ]
+    }, {
+        path: '/culture',
+        name: 'Culture',
+        meta: {requiresAuth: true},  // 需要登录才能访问
+        children: [
+            {
+                path: 'detail/:id', // :id 是动态参数
+                name: 'CultureDetail',
+                component: CultureDetail,
+            }, {
+                path: 'add',
+                name: 'CultureAdd',
+                component: CultureAdd,
+            }, {
+                path: 'edit/:id',
+                name: 'CultureEdit',
+                component: CultureEdit,
             }
         ]
     }, {
