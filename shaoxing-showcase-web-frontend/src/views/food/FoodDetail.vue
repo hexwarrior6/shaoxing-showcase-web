@@ -48,7 +48,7 @@
 import {onMounted, ref, watch} from 'vue';
 import axios from 'axios';
 import {useRoute} from 'vue-router';
-import {ElMessageBox, ElMessage} from 'element-plus';
+import {ElMessage, ElMessageBox} from 'element-plus';
 import Footer from "@/components/home/Footer.vue";
 import Header from "@/components/home/Header.vue";
 
@@ -85,18 +85,18 @@ export default {
         type: 'warning'
       }).then(() => {
         axios.delete(`/api/local-foods/${foodId}`, {withCredentials: true})
-          .then(response => {
-            if (response.data.code === 200) {
-              ElMessage.success('删除成功');
-              window.location.href = '/home';
-            } else {
-              ElMessage.error('删除失败');
-            }
-          })
-          .catch(error => {
-            console.error('删除请求失败', error);
-            ElMessage.error('删除过程中出现错误');
-          });
+            .then(response => {
+              if (response.data.code === 200) {
+                ElMessage.success('删除成功');
+                window.location.href = '/home';
+              } else {
+                ElMessage.error('删除失败');
+              }
+            })
+            .catch(error => {
+              console.error('删除请求失败', error);
+              ElMessage.error('删除过程中出现错误');
+            });
       }).catch(() => {
         ElMessage({
           type: 'info',

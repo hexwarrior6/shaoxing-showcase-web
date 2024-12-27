@@ -3,7 +3,7 @@
     <el-row justify="center" align="middle" class="full-height">
       <el-col :span="24" class="text-center">
         <el-icon size="100" class="icon-404">
-          <document-delete />
+          <document-delete/>
         </el-icon>
         <h1 class="title">404</h1>
         <p class="description">抱歉，您访问的页面不存在</p>
@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { ElButton, ElRow, ElCol, ElIcon } from 'element-plus';
-import { DocumentDelete } from '@element-plus/icons-vue';
+import {ElButton, ElCol, ElIcon, ElRow} from 'element-plus';
+import {DocumentDelete} from '@element-plus/icons-vue';
 
 export default {
   components: {

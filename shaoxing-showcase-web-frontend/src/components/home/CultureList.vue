@@ -278,7 +278,7 @@ export default {
 
 .culture-container,
 .culture-display-container {
-  border-radius: 10px; /* Uniform roundness for both containers */
+  border-radius: 10px;
 }
 
 .culture-container {
@@ -299,8 +299,8 @@ export default {
   z-index: -1;
   filter: blur(5px);
   pointer-events: none;
-  box-shadow: none; /* Ensure no shadow is applied to the pseudo-element */
-  border-radius: 10px; /* Match the container's border-radius */
+  box-shadow: none;
+  border-radius: 10px;
 }
 
 .culture-display-container {

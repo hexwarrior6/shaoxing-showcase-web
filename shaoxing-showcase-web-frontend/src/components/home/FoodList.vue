@@ -277,7 +277,7 @@ export default {
 
 .food-container,
 .food-display-container {
-  border-radius: 10px; /* Uniform roundness for both containers */
+  border-radius: 10px;
 }
 
 .food-container {
@@ -285,7 +285,7 @@ export default {
   background: linear-gradient(135deg, #fafafa 30%, #FDFDFD);
   position: relative;
   z-index: 1;
-  box-shadow: none; /* Ensure no shadow is applied */
+  box-shadow: none;
 }
 
 .food-container::after {
@@ -298,8 +298,8 @@ export default {
   z-index: -1;
   filter: blur(5px);
   pointer-events: none;
-  box-shadow: none; /* Ensure no shadow is applied to the pseudo-element */
-  border-radius: 10px; /* Match the container's border-radius */
+  box-shadow: none;
+  border-radius: 10px;
 }
 
 .food-display-container {
@@ -312,6 +312,4 @@ export default {
   position: relative;
   z-index: 1;
 }
-
-/* Other CSS rules remain unchanged */
 </style>

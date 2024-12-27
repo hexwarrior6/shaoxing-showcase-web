@@ -142,7 +142,6 @@ export default {
         const response = await axios.put(`/api/local-sights/${this.scenery.id}`, this.scenery, {withCredentials: true});
         if (response.data.code === 200) {
           ElMessage.success('景点更新成功！');
-          // Optionally, navigate back or to another page
         } else {
           ElMessage.error('更新景点失败，请重试。');
         }

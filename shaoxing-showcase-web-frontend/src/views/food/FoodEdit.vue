@@ -30,11 +30,9 @@ export default {
           .then(response => {
             if (response.data.code === 200) {
               this.food = {...response.data.data, id: foodId};
-              // If the imageUrl is not provided, set it to an empty string or handle accordingly
               if (!this.food.imageUrl) {
                 this.food.imageUrl = '';
               } else {
-                // Assuming the server returns a URL for existing images
                 this.imageFileList = [{url: '/image/' + this.food.imageUrl}];
               }
             } else {
@@ -63,7 +61,7 @@ export default {
       if (!formEl) return;
       await formEl.validate((valid, fields) => {
         if (valid) {
-          this.updateFood(); // Changed to updateFood for editing
+          this.updateFood();
         } else {
           console.log('error submit!', fields);
           ElMessage.error('请完整填写带（*）的栏目！');

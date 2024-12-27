@@ -93,7 +93,7 @@ export default {
       if (!formEl) return;
       await formEl.validate((valid, fields) => {
         if (valid) {
-          this.submitScenery(); // Call the existing submitScenery method if validation passes
+          this.submitScenery();
         } else {
           console.log('error submit!', fields);
           ElMessage.error('请完整填写带（*）的栏目！');
