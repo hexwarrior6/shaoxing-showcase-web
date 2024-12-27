@@ -31,30 +31,36 @@
 
 ## 🛠️ 快速开始
 
+```bash
+# 克隆前后端项目到本地
+git clone https://gitee.com/HexWarrior6/shaoxing-showcase-web.git
+```
+
 ### 后端环境准备
 
 1. 📥 安装 Maven（就像准备厨房的锅碗瓢盆）
-2. 🔄 克隆项目到本地
-3. 📂 用你喜欢的 IDE 打开项目
-4. 🗃️ 配置数据库连接
+2. 📂 用你喜欢的 IDE 打开项目
+3. 🗃️ 配置 MySQL 数据库并导入项目中的 [hexwarrior6shaoxingshowcase.sql](doc/deploy/hexwarrior6shaoxingshowcase.sql) 文件。
 
 ### 前端环境准备
 
 1. 📦 安装 Node.js
-2. 🔄 克隆前端项目
-3. ⚡ 运行 `npm install` 安装依赖
-4. 🚀 启动开发服务器
+2. ⚡ 运行 `npm install` 安装依赖
+3. 🚀 启动开发服务器
 
 ## 🎮 运行项目
 
 ### 后端启动
+
 > 选择以下任意一种方式
 
 - 使用maven运行
+
 ```bash
 # 进入后端文件夹
 cd shaoxing-showcase-web-backend
 ```
+
 ```bash
 mvn spring-boot:run
 ```
@@ -62,14 +68,17 @@ mvn spring-boot:run
 - 直接在 IDE 中运行
 
 ### 前端启动
+
 ```bash
 # 进入前端文件夹
 cd shaoxing-showcase-web-frontend
 ```
+
 ```bash
 # 确保已经安装了依赖
 npm install
 ```
+
 ```bash
 # 启动开发服务器
 npm run dev
@@ -80,6 +89,7 @@ npm run dev
 ## 📦 项目依赖
 
 ### 后端依赖
+
 - Spring Boot Starter Parent (3.4.1) - 坚实的地基
 - Spring Boot Starter Web (8.0.33) - Web 开发必备
 - Fastjson2 (2.0.53) - JSON 处理利器
@@ -87,12 +97,13 @@ npm run dev
 - mybatis (3.0.3) - 持久化的好帮手
 
 ### 前端依赖
+
 - Axios (^1.7.9) - 优雅的 HTTP 客户端
 - Element Plus (^2.9.1) - 漂亮的 UI 组件库
 - Pinia (^2.2.6) - 新一代状态管理
 - 自动导入插件组合拳 (优化开发体验)
-  - Unplugin-auto-import (^0.19.0)
-  - Unplugin-vue-components (^0.28.0)
+    - Unplugin-auto-import (^0.19.0)
+    - Unplugin-vue-components (^0.28.0)
 
 ## 🧑‍💻 作者
 
