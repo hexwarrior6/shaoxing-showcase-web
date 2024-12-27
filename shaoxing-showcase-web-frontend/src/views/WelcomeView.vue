@@ -9,8 +9,8 @@
       <el-image style="width: 100%; height: 100%;" fit="cover" src="../src/assets/image/city-9193823_1920.jpg"/>
     </div>
     <div class="welcome-title">
-      <div><h1>欢迎来到我们的学习平台</h1></div>
-      <div><p>在这里你可以学习java和网页开发</p></div>
+      <div><h1>欢迎来到绍兴家乡介绍平台</h1></div>
+      <div><p>在这里你可以了解绍兴的美食、景点和文化</p></div>
     </div>
     <!-- 右侧功能框 -->
     <div style="width: 400px; background-color: #fff;padding: 50px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 1">

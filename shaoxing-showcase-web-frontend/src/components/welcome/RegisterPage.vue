@@ -99,7 +99,7 @@ const onValidate = (prop, isValid) => {
   <div style="width: 90%; background-color: #fff; padding: 50px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
     <!-- 标题 -->
     <div style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">注册</div>
-    <div style="font-size: 14px; color: gray; margin-bottom: 30px;">欢迎注册我们的学习平台，请在下方填写相关信息</div>
+    <div style="font-size: 14px; color: gray; margin-bottom: 30px;">欢迎注册绍兴家乡介绍平台，请在下方填写相关信息</div>
 
     <el-form style="width: 100%" :model="form" :rules="register_checker" @validate="onValidate" ref="registerFormRef">
       <!-- 用户名输入框 -->
