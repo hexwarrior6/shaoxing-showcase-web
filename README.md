@@ -11,6 +11,44 @@
 
 ## 🏗️ 项目结构
 
+```mermaid
+graph TB
+    subgraph "前端层 Frontend"
+        A1[Vue3] --> A2[Element Plus]
+        A1 --> A3[Axios]
+        A1 --> A4[Pinia状态管理]
+    end
+
+    subgraph "后端层 Backend"
+        B1[Controller层] --> B2[Service层]
+        B2 --> B3[Mapper层]
+        B4[Spring Security] --> B1
+    end
+
+    subgraph "数据持久层 Database"
+        C1[(MySQL Database)]
+        C2[MyBatis] --> C1
+    end
+
+    A3 -- "HTTP/RESTful API" --> B1
+    B3 --> C2
+
+    subgraph "MVC架构详解"
+        D1[Controller] --> D2[Service]
+        D2 --> D3[Model]
+        D1 -- "返回数据" --> D4[View/Frontend]
+        D4 -- "用户请求" --> D1
+    end
+
+    subgraph "核心业务模块"
+        E1[用户管理] 
+        E2[文化展示]
+        E3[景点展示]
+        E4[美食展示]
+    end
+```
+<div style="font-size:14px;color:gray;text-decoration:underline; text-align: center;">图1.系统架构图</div> 
+
 ### 🚀 后端项目 (shaoxing-showcase-web-backend)
 
 ```
@@ -28,6 +66,57 @@
 - Vite - 闪电般的开发体验
 - Element Plus - 优雅的 UI 组件库
 ```
+
+## 📒 数据库设计
+
+```mermaid
+erDiagram
+
+    account {
+        int id PK
+        string username UK
+        string password
+        string email UK
+        string avatarUrl
+    }
+
+    local_culture {
+        int id PK
+        string culture_name
+        text description
+        text significance
+        string image_url
+        string time
+    }
+
+    local_sights {
+        int id PK
+        string sight_name
+        string location
+        text description
+        string image_url
+        string opening_hours
+    }
+
+    local_foods {
+        int id PK
+        string food_name
+        text description
+        text ingredients
+        string image_url
+        string origin
+    }
+
+    persistent_logins {
+        string username PK
+        string series PK
+        string token
+        timestamp last_used
+    }
+
+    account ||--o| persistent_logins : "记住登录"
+```
+<div style="font-size:14px;color:gray;text-decoration:underline; text-align: center;">图2.数据库ER图</div>
 
 ## 🛠️ 快速开始
 
