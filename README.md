@@ -19,8 +19,8 @@
 ### 文化展示模块
 展现绍兴独特的文化特色，包含展示、详情和编辑功能。
 <center class="half">
-<img height="200" src="doc/screenshot/local-culture.png" alt="文化展示列表页" style="max-width: 800px; margin: 10px 0;"> <img height="200" src="doc/screenshot/local-culture-detail.png" alt="文化展示详情页" style="max-width: 800px; margin: 10px 0;"> <img height="200" src="doc/screenshot/local-culture-edit.png" alt="文化展示编辑页" style="max-width: 800px; margin: 10px 0;"></center>
-
+<img height="200" src="doc/screenshot/local-culture.png" alt="文化展示列表页" style="max-width: 800px; margin: 10px 0;"> <img height="200" src="doc/screenshot/local-culture-detail.png" alt="文化展示详情页" style="max-width: 800px; margin: 10px 0;"> <img height="200" src="doc/screenshot/local-culture-edit.png" alt="文化展示编辑页" style="max-width: 800px; margin: 10px 0;">
+</center>
 
 ### 景点展示模块
 展示绍兴著名景点，包含列表、详情和编辑功能。
@@ -227,4 +227,4 @@ npm run dev
 
 ## 🧑‍💻 作者
 
-<img height="200" src="doc/screenshot/https://foruda.gitee.com/avatar/1698061097111753136/11410858_hexwarrior6_1698061097.png" alt="头像" width="30" style="vertical-align: middle;"/>[ HexWarrior6](https://gitee.com/hexwarrior6)
+<img src="https://foruda.gitee.com/avatar/1698061097111753136/11410858_hexwarrior6_1698061097.png" alt="头像" width="30" style="vertical-align: middle; border-radius: 50%;"/>[ HexWarrior6](https://gitee.com/hexwarrior6)
