@@ -1,14 +1,17 @@
 <template>
   <footer class="footer">
     <div class="footer-content">
-      <p>&copy; 2024 HexWarrior6 | 班级：22计算机H3班 | 学号：22H034160308 | 姓名：朱宇浩 | 邮箱：hexwarrior6@qq.com</p>
+      <p>&copy; 2024 HexWarrior6. All rights reserved. </p>
     </div>
   </footer>
 </template>
 
 <script>
+import {Right} from "@element-plus/icons-vue";
+
 export default {
   name: 'Footer',
+  components: {Right},
 };
 </script>
 
