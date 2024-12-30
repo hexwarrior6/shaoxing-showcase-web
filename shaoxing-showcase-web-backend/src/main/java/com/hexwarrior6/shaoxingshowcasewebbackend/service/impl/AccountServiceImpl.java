@@ -9,6 +9,12 @@ import jakarta.annotation.Resource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     @Resource
@@ -31,21 +37,21 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String sendValidationEmail(String email) {
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create("https://ygwyy.top/邮箱/index.php"))
-//                .method("POST", HttpRequest.BodyPublishers.ofString("email=" + email + "&username=" + email))
-//                .build();
-//        HttpResponse<String> response = null;
-//        try {
-//            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-//        } catch (IOException | InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        // 假设 response 是你的 HTTP 响应对象
-//        String responseBody = response.body();  // 获取响应的 JSON 字符串
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://ygwyy.top/邮箱/index.php"))
+                .method("POST", HttpRequest.BodyPublishers.ofString("email=" + email + "&username=" + email))
+                .build();
+        HttpResponse<String> response = null;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // 假设 response 是你的 HTTP 响应对象
+        String responseBody = response.body();  // 获取响应的 JSON 字符串
 
-        // 示例 JSON 字符串
-        String responseBody = "{\"success\":true,\"message\":\"592187\"}";
+//        // 示例 JSON 字符串
+//        String responseBody = "{\"success\":true,\"message\":\"592187\"}";
         // 将 JSON 字符串解析为 JSONObject 对象
         JSONObject jsonResponse = JSON.parseObject(responseBody);
         // 通过 key 提取具体的字段
